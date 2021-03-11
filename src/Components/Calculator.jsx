@@ -11,6 +11,9 @@ export const Calculator = () => {
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
+      background: "linear-gradient(#56CCF2, #2F80ED)",
+      borderRadius: 5,
+      backgroundColor: "##E94C6F",
     },
   }));
   const classes = useStyles();
@@ -62,7 +65,6 @@ export const Calculator = () => {
         "+": valueOperation + value,
       };
       setValue(operacao[operatorSignal]);
-
       return;
     }
 
@@ -78,6 +80,24 @@ export const Calculator = () => {
 
         setValue(value - valueOperation);
       }
+    }
+
+    if (BodyCalculator === "+") {
+      setoperatorSignal("+");
+      if (valueOperation === 0) {
+        setValueOperation(value);
+        setValue(0);
+        return;
+      }
+
+      if (valueOperation !== 0) {
+        setValueOperation(value + valueOperation);
+        setValue(value + valueOperation);
+        return;
+      }
+    }
+    if (BodyCalculator === ".") {
+      setValue(value + ".");
     }
   };
 
