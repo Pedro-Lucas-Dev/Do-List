@@ -12,6 +12,7 @@ import {
   Toolbar,
 } from "@material-ui/core";
 import { Delete, ControlPoint } from "@material-ui/icons";
+import { Calculator } from "./Components/Calculator";
 
 function App() {
   const [value, setValue] = useState("");
@@ -72,6 +73,7 @@ function App() {
             </Paper>
           </Grid>
         </Grid>
+        <Calculator />
       </Container>
     </div>
   );
