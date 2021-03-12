@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Container, Grid, Paper, makeStyles } from "@material-ui/core";
-import BodyCalculator from "../Components/BodyCalculator";
-import { Text, Display } from "../Components/Text";
+import BodyCalculator from "./BodyCalculator";
+import { Text, Display } from "./Text";
 
 export const Calculator = () => {
   const useStyles = makeStyles(() => ({
