@@ -13,7 +13,6 @@ export const Calculator = () => {
       alignItems: "center",
       background: "linear-gradient(#56CCF2, #2F80ED)",
       borderRadius: 5,
-      backgroundColor: "##E94C6F",
     },
   }));
   const classes = useStyles();
@@ -104,27 +103,29 @@ export const Calculator = () => {
   return (
     <Container>
       <Text text="Calculadora" />
-      <Display value={value} />
-      <Grid
-        container
-        alignContent={"center"}
-        alignItems={"center"}
-        direction={"column"}
-      >
-        <Grid item sm={3} container alignItems="center">
-          <Grid item container lg={12} spacing={1}>
-            {BodyCalculator.map((body) => {
-              return (
-                <CalculatorItem
-                  key={body.label}
-                  label={body.label}
-                  onClick={() => Operation(body.label)}
-                />
-              );
-            })}
+      <Paper elevation={3}>
+        <Display value={value} />
+        <Grid
+          container
+          alignContent={"center"}
+          alignItems={"center"}
+          direction={"column"}
+        >
+          <Grid item sm={3} container alignItems="center">
+            <Grid item container lg={12} spacing={1}>
+              {BodyCalculator.map((body) => {
+                return (
+                  <CalculatorItem
+                    key={body.label}
+                    label={body.label}
+                    onClick={() => Operation(body.label)}
+                  />
+                );
+              })}
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
+      </Paper>
     </Container>
   );
 };

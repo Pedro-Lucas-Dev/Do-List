@@ -1,21 +1,21 @@
 import {
   Container,
   Grid,
-  Paper,
   Button,
   TextField,
   Typography,
   List,
   ListItem,
-  AppBar,
-  Toolbar,
+  makeStyles,
 } from "@material-ui/core";
 import { Delete, ControlPoint } from "@material-ui/icons";
 import React, { useState } from "react";
 
 export const DoList = () => {
   const [value, setValue] = useState("");
+
   const [items, setItems] = useState([]);
+
   const addItem = () => {
     if (!value.trim() || isNaN(value) === false) {
       return null;
@@ -23,6 +23,7 @@ export const DoList = () => {
     setItems([...items, value]);
     setValue("");
   };
+
   const renderItem = () => {
     if (items.length === 0) {
       return <ListItem>Não há Tarefas</ListItem>;
@@ -32,47 +33,81 @@ export const DoList = () => {
     });
   };
 
-  return (
-    <div>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h3">Ex Lista de Tarefas</Typography>
-        </Toolbar>
-      </AppBar>
-      <Container>
-        <Grid container spacing={3}>
-          <Grid item xs={12} lg={12} md={6}>
-            <Paper elevation={1}>
-              <Typography variant="body1">Lista de Tarefas:</Typography>
-              <List>{renderItem()}</List>
-            </Paper>
-          </Grid>
-
-          <Grid item xs={12} lg={12} md={6}>
-            <Paper elevation={1}>
-              <TextField
-                value={value}
-                label="Digite sua tarefa"
-                onChange={(event) => setValue(event.target.value)}
-              />
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={() => addItem()}
-              >
-                <ControlPoint />
-              </Button>
-              <Button
-                variant="contained"
-                color="secondary"
-                onClick={() => setItems([])}
-              >
-                <Delete />
-              </Button>
-            </Paper>
-          </Grid>
+  const ButtonActions = () => {
+    return (
+      <Grid container item className={classes.buttons}>
+        <Grid item lg={6}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => addItem()}
+            fullWidth
+            disabled
+          >
+            <ControlPoint />
+          </Button>
         </Grid>
-      </Container>
-    </div>
+        <Grid item lg={6}>
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={() => setItems([])}
+            fullWidth
+            disabled
+          >
+            <Delete />
+          </Button>
+        </Grid>
+      </Grid>
+    );
+  };
+
+  const useStyles = makeStyles({
+    text: {
+      background: "#a6d4fa",
+      borderTopLeftRadius: 5,
+      borderTopRighttRadius: 5,
+      padding: 8,
+    },
+    body: {
+      background: "#fff",
+    },
+    item: {
+      background: "#ccc",
+      padding: 8,
+    },
+    buttons: {
+      background: "#aedaa6",
+    },
+  });
+  const classes = useStyles();
+
+  const Header = ({ text }) => {
+    return (
+      <Grid item className={classes.text}>
+        <Typography variant="h5" color="initial" align="center">
+          {text}
+        </Typography>
+      </Grid>
+    );
+  };
+
+  return (
+    <Container>
+      <Grid container direction="column" item lg={4}>
+        <Header text="To Do List" />
+        <Grid item className={classes.body}>
+          <List>{renderItem()}</List>
+        </Grid>
+        <Grid item className={classes.item}>
+          <TextField
+            value={value}
+            label="Digite sua tarefa"
+            onChange={(event) => setValue(event.target.value)}
+          />
+        </Grid>
+        <ButtonActions />
+      </Grid>
+    </Container>
   );
 };

@@ -3,7 +3,7 @@ import React from "react";
 
 export const Text = ({ text }) => {
   return (
-    <Typography align="center" variant="h2" color="primary">
+    <Typography align="center" variant="h2" color="inherit">
       {text}
     </Typography>
   );
